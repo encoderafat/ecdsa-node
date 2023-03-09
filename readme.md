@@ -4,6 +4,11 @@ This project is an example of using a client and server to facilitate transfers 
 
 However, something that we would like to incoporate is Public Key Cryptography. By using Elliptic Curve Digital Signatures we can make it so the server only allows transfers that have been signed for by the person who owns the associated address.
 
+<img src="./ecdsa.png" />
+
+This is a very simplified solution as it only ensures that the signing wallet is the same as the wallet that is transferring amount. It is done by ensuring that
+the signing wallet signs a transcation that is then send to the server along with the amount, message hash, public addresses of the sender and receiving wallets. The server uses the verify function of the ethereum cryptography's secp256k1 library to verify that the signer wallet is same as the sender wallet. So, for example, wallet 1 can only transfer amount from wallet 1 to wallet 3. If it tries to transfer any amount from wallet 2 to wallet 3, the server will make sure that since the signed transaction didn't come  from wallet 2 , it will fail.
+
 ### Video instructions
 For an overview of this project as well as getting started instructions, check out the following video:
 
